@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -107,6 +108,19 @@ public class EmployeeController {
     	return Result.success();
     }
     
+    @GetMapping("/{id}")
+    @ApiOperation("idに基づいて従業員情報を検索します")
+    public Result<Employee> getById(@PathVariable Long id){
+    	Employee employee = employeeService.getById(id);
+    	return Result.success(employee);
+    }
+    
+    @PutMapping
+    @ApiOperation("従業員情報を編集します")
+    public Result update(@RequestBody EmployeeDTO employeeDTO) {
+    	employeeService.update(employeeDTO);
+    	return Result.success();
+    }
     
     
     
